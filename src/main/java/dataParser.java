@@ -1,27 +1,28 @@
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
 class dataParser {
 
-    public static String newFile() {
+    public static String newFile() throws IOException {
 
         //create JsonParser object
 
-        //read json file data to String
-        File file = new File("/Users/ahoward/Desktop/projects/HurtLocker/target/classes/RawData.txt");
-        //JsonParser jsonParser = new JsonFactory().createParser(new File("/Users/ahoward/Desktop/projects/HurtLocker/target/classes/RawData.txt"));
+        //read  file data to String
+        //File file = new File("/Users/ahoward/Desktop/projects/HurtLocker/target/classes/RawData.txt");
+        JsonParser jsonParser = new JsonFactory().createParser(new File("/Users/ahoward/Desktop/projects/HurtLocker/target/classes/RawData.txt"));
         StringBuilder result = new StringBuilder("");
 
-        try (Scanner scanner = new Scanner(file)) {
+        try (Scanner scanner = new Scanner((Readable) jsonParser)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 result.append(line).append("\n");
                 System.out.println(result);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return result.toString();
     }
