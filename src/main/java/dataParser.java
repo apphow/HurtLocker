@@ -1,12 +1,17 @@
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class dataParser {
+    private String dataParser;
+    public void  DataParser() throws IOException {this.dataParser = newFile();}
 
     public static String newFile() throws IOException {
 
@@ -25,6 +30,24 @@ class dataParser {
             }
         }
         return result.toString();
+    }
+
+    public String getDataParser() {
+        return dataParser;
+    }
+    public String changeNameToLowerCase(String str) {
+
+        Pattern pattern = Pattern.compile("naMe", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(str.toLowerCase());
+
+        return matcher.replaceAll("naMe");
+    }
+
+    public String removeHashNewLine(String str) {
+
+        Pattern pattern = Pattern.compile("[##]", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(str);
+        return matcher.replaceAll("\n");
     }
 }
 

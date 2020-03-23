@@ -1,5 +1,7 @@
 import com.fasterxml.jackson.core.JsonParseException;
 import org.apache.commons.io.IOUtils;
+
+import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Main {
@@ -8,6 +10,7 @@ public class Main {
         ClassLoader classLoader = getClass().getClassLoader();
         String result = IOUtils.toString(classLoader.getResourceAsStream("RawData.txt"));
         return result;
+
     }
 
     public static void main(String[] args) throws Exception{
